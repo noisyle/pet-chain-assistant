@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<style>
+body {
+    width: 400px;
+}
+.container {
+    margin-bottom: 10px;
+    max-width: 360px;
+}
+.form-horizontal .form-group-sm .control-label {
+    padding-top: 4px;
+    margin-bottom: 0;
+    text-align: right;
+}
+.form-horizontal .form-group-sm .checkbox {
+    padding-top: 4px;
+    margin-bottom: 0;
+}
+input[type=number]{
+    text-align: right;
+}
+#thresholds_table .col1 {
+    font-weight: bolder;
+    text-align: center;
+    vertical-align: middle;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<form class="form-horizontal">
+<h3>莱茨狗助手 <small>狗狗集市辅助工具</small></h3>
+<hr />
+<div class="form-group form-group-sm">
+    <label for="enable" class="col-xs-3 control-label">开始刷新</label>
+    <div class="col-xs-9">
+        <div class="checkbox">
+            <label><input type="radio" name="enable" value="true"> 开始</label>
+            <label><input type="radio" name="enable" value="false"> 停止</label>
+        </div>
+    </div>
+</div>
+<div class="form-group form-group-sm">
+    <label for="interval" class="col-xs-3 control-label">查询间隔</label>
+    <div class="col-xs-9">
+        <div class="input-group input-group-sm"><input type="number" class="form-control" id="interval" placeholder="查询间隔" /><span class="input-group-addon">毫秒</span></div>
+    </div>
+</div>
+<div class="form-group form-group-sm">
+    <label for="pageSize" class="col-xs-3 control-label">每次查询</label>
+    <div class="col-xs-9">
+        <div class="input-group input-group-sm"><input type="number" class="form-control" id="pageSize" placeholder="每次查询条数" /><span class="input-group-addon">条数</span></div>
+    </div>
+</div>
+<div class="form-group form-group-sm">
+    <label for="querySortType" class="col-xs-3 control-label">排序方式</label>
+    <div class="col-xs-9">
+        <div class="checkbox">
+            <label><input type="radio" name="querySortType" value="CREATETIME_DESC"> 时间降序</label>
+            <label><input type="radio" name="querySortType" value="AMOUNT_ASC"> 金额升序</label>
+        </div>
+    </div>
+</div>
+<div class="form-group form-group-sm">
+    <label for="thresholds_table" class="col-xs-3 control-label">金额阈值</label>
+    <div class="col-xs-9">
+        <table class="table table-bordered table-condensed" id="thresholds_table">
+            <tbody>
+                <tr>
+                    <td class="col1"><span class="label label-default">普通</span></td><td><div class="input-group input-group-sm"><span class="input-group-addon">不高于</span><input type="number" class="form-control" name="threshold" value="0" /><span class="input-group-addon">微</span></div></td>
+                </tr>
+                <tr>
+                    <td class="col1"><span class="label label-success">稀有</span></td><td><div class="input-group input-group-sm"><span class="input-group-addon">不高于</span><input type="number" class="form-control" name="threshold" value="0" /><span class="input-group-addon">微</span></div></td>
+                </tr>
+                <tr>
+                    <td class="col1"><span class="label label-info">卓越</span></td><td><div class="input-group input-group-sm"><span class="input-group-addon">不高于</span><input type="number" class="form-control" name="threshold" value="0" /><span class="input-group-addon">微</span></div></td>
+                </tr>
+                <tr>
+                    <td class="col1"><span class="label label-primary">史诗</span></td><td><div class="input-group input-group-sm"><span class="input-group-addon">不高于</span><input type="number" class="form-control" name="threshold" value="0" /><span class="input-group-addon">微</span></div></td>
+                </tr>
+                <tr>
+                    <td class="col1"><span class="label label-warning">神话</span></td><td><div class="input-group input-group-sm"><span class="input-group-addon">不高于</span><input type="number" class="form-control" name="threshold" value="0" /><span class="input-group-addon">微</span></div></td>
+                </tr>
+                <tr>
+                    <td class="col1"><span class="label label-danger">传说</span></td><td><div class="input-group input-group-sm"><span class="input-group-addon">不高于</span><input type="number" class="form-control" name="threshold" value="0" /><span class="input-group-addon">微</span></div></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="form-group form-group-sm">
+    <div class="col-xs-12">
+        <button type="button" class="btn btn-primary btn-sm btn-block" id="btnOk">确定</button>
+    </div>
+</div>
+</form>
+</div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="popup.js"></script>
+</html>

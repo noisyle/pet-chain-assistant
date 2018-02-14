@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "莱茨狗助手",
+  "description": "狗狗集市辅助工具",
+  "version": "0.0.1",
+  "icons": { "128": "icon115.png" },
+  "background": {
+    "scripts": ["js/jquery.min.js", "background.js"],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://pet-chain.baidu.com/chain/detail*"],
+      "js": ["js/jquery.min.js", "content_script.js"]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "http://*.baidu.com/",
+    "https://*.baidu.com/"
+  ]
+}
