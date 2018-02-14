@@ -11,7 +11,14 @@
   var colors = ['#555', '#5cb85c', '#5bc0de', '#337ab7', '#f0ad4e', '#d9534f'];
   
   var getParam = function() {
-    return {"pageNo":1,"pageSize":option.pageSize,"querySortType":option.querySortType,"petIds":[],"requestId":new Date().getTime(),"appId":1};
+    return {
+      "pageNo": 1,
+      "pageSize": option.pageSize,
+      "querySortType": option.querySortType,
+      "petIds": [],
+      "requestId": new Date().getTime(),
+      "appId": 1
+    };
   };
 
   function doQuery() {
@@ -64,6 +71,7 @@
   chrome.extension.onMessage.addListener(
     function(request, sender, sendResponse) {
       $.extend(option, request);
+      orders = [];
       if(loop != null){
         window.clearInterval(loop);
       }
