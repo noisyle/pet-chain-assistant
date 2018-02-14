@@ -8,6 +8,7 @@
   };
   var orders = [];
   var loop = null;
+  var colors = ['#555', '#5cb85c', '#5bc0de', '#337ab7', '#f0ad4e', '#d9534f'];
   
   var getParam = function() {
     return {"pageNo":1,"pageSize":option.pageSize,"querySortType":option.querySortType,"petIds":[],"requestId":new Date().getTime(),"appId":1};
@@ -30,7 +31,7 @@
       if(data.data && data.data.petsOnSale) {
         console.log("查询返回结果%i条", data.data.petsOnSale.length);
         data.data.petsOnSale.forEach(function(item, index){
-          console.log("id: %s, 稀有度: %i, 价格: %d", item.petId, item.rareDegree, parseFloat(item.amount));
+          console.log("id: %s, %c稀有度: %i%c, 价格: %d", item.petId, "color: #fff; background: " + colors[item.rareDegree] + ";", item.rareDegree, "color: #000; background: #fff;", parseFloat(item.amount));
           if(judge(item) && $.inArray(item.id, orders)<0) {
             orders.push(item.id);
             var url = "https://pet-chain.baidu.com/chain/detail?channel=market&petId="+item.petId+"&validCode=";//+item.validCode;
