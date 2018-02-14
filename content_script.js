@@ -2,13 +2,13 @@ $(function(){
     setTimeout(function(){
         $("div.button").click();
         setTimeout(function(){
-            $(".sms-input>input").focus();
+            $(".sms-input input")[0].focus();
             var btn = $(".mint-popup div.button");
-            $(".sms-input>input").keydown(function(e){
-                if(e.keyCode==13){ 
-                    btn.click(); 
-                } 
+            $(".sms-input input").keydown(function(e){
+                if(e.keyCode==13){
+                    btn.click();
+                }
             });
-        }, 300);
+        }, 1000);
     }, 200);
 });
