@@ -30,7 +30,7 @@
     if(data.errorMsg === "success") {
       if(data.data && data.data.petsOnSale) {
         console.log("查询返回结果%i条", data.data.petsOnSale.length);
-        data.data.petsOnSale.forEach(function(item, index){
+        data.data.petsOnSale.sort(function(a, b){return b.rareDegree - a.rareDegree}).forEach(function(item, index){
           console.log("id: %s, %c稀有度: %i%c, 价格: %d", item.petId, "color: #fff; background: " + colors[item.rareDegree] + ";", item.rareDegree, "color: #000; background: #fff;", parseFloat(item.amount));
           if(judge(item) && $.inArray(item.id, orders)<0) {
             orders.push(item.id);
