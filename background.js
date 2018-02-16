@@ -4,6 +4,7 @@
     interval: 2000,
     pageSize: 20,
     querySortType: "CREATETIME_DESC",
+    autoActive: false,
     thresholds: [0, 0, 0, 0, 0, 0]
   };
   var orders = [];
@@ -36,13 +37,13 @@
   function doQueryCallback(data) {
     if(data.errorMsg === "success") {
       if(data.data && data.data.petsOnSale) {
-        console.log("查询返回结果%i条", data.data.petsOnSale.length);
+        console.log("%s : 查询返回结果%i条", new Date().toLocaleString('chinese', {hour12: false}), data.data.petsOnSale.length);
         data.data.petsOnSale.sort(function(a, b){return b.rareDegree === a.rareDegree ? a.amount - b.amount : b.rareDegree - a.rareDegree}).forEach(function(item, index){
-          console.log("id: %s, %c稀有度: %i%c, 价格: %d", item.petId, "color: #fff; background: " + colors[item.rareDegree] + ";", item.rareDegree, "color: #000; background: #fff;", parseFloat(item.amount));
+          console.log("id: %s, %c稀有度: %i%c, 价格: %.2f", item.petId, "color: #fff; background: " + colors[item.rareDegree] + ";", item.rareDegree, "color: #000; background: #fff;", parseFloat(item.amount));
           if(judge(item) && $.inArray(item.id, orders)<0) {
             orders.push(item.id);
             var url = "https://pet-chain.baidu.com/chain/detail?channel=market&petId="+item.petId+"&validCode=";//+item.validCode;
-            chrome.tabs.create({url: url}, function(tab){ });
+            chrome.tabs.create({url: url, active: option.autoActive}, function(tab){ });
             console.log("发现符合条件的记录，跳转交易页面: %s", url);
           }
         });
