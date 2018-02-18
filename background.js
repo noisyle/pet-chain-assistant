@@ -10,6 +10,7 @@
   var orders = [];
   var loop = null;
   var colors = ['#555', '#5cb85c', '#5bc0de', '#337ab7', '#f0ad4e', '#d9534f'];
+  var alarm;
   
   var getParam = function() {
     return {
@@ -45,6 +46,9 @@
             var url = "https://pet-chain.baidu.com/chain/detail?channel=market&petId="+item.petId+"&validCode=";//+item.validCode;
             chrome.tabs.create({url: url, active: option.autoActive}, function(tab){ });
             console.log("发现符合条件的记录，跳转交易页面: %s", url);
+            if (alarm.paused) {
+              alarm.play();
+            }
           }
         });
       }
@@ -67,6 +71,9 @@
   $(function() {
     doQuery();
     loop = window.setInterval(doQuery, option.interval);
+    alarm = new Audio();
+    alarm.src = "sound/bell-small.mp3";
+    alarm.load();
   });
 
   chrome.extension.onMessage.addListener(
