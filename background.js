@@ -9,7 +9,8 @@
   };
   var orders = [];
   var loop = null;
-  var colors = ['#555', '#5cb85c', '#5bc0de', '#337ab7', '#f0ad4e', '#d9534f'];
+  var rareColors = ['#555', '#5cb85c', '#5bc0de', '#337ab7', '#f0ad4e', '#d9534f'];
+  var rareNames = ['普通', '稀有', '卓越', '史诗', '神话', '传说'];
   var alarm;
   
   var getParam = function() {
@@ -40,7 +41,7 @@
       if(data.data && data.data.petsOnSale) {
         console.log("%s : 查询返回结果%i条", new Date().toLocaleString('chinese', {hour12: false}), data.data.petsOnSale.length);
         data.data.petsOnSale.sort(function(a, b){return b.rareDegree === a.rareDegree ? a.amount - b.amount : b.rareDegree - a.rareDegree}).forEach(function(item, index){
-          console.log("id: %s, %c稀有度: %i%c, 价格: %.2f", item.petId, "color: #fff; background: " + colors[item.rareDegree] + ";", item.rareDegree, "color: #000; background: #fff;", parseFloat(item.amount));
+          console.log("id: %s, %c稀有度: %i (%s)%c, 价格: %.2f", item.petId, "color: #fff; background: " + rareColors[item.rareDegree] + ";", item.rareDegree, rareNames[item.rareDegree], "color: #000; background: #fff;", parseFloat(item.amount));
           if(judge(item) && $.inArray(item.id, orders)<0) {
             orders.push(item.id);
             var url = "https://pet-chain.baidu.com/chain/detail?channel=market&petId="+item.petId+"&validCode=";//+item.validCode;
