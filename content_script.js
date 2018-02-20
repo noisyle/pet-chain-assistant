@@ -10,5 +10,6 @@ $(function(){
                 }
             });
         }, 1000);
+        $("title").text($(".tag-info .rareDegree").text() + " - " + $("title").text());
     }, 200);
 });
