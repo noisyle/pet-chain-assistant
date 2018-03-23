@@ -1,8 +1,8 @@
 (function($, window) {
   var option = {
     enable: false,
-    interval: 2000,
-    pageSize: 20,
+    interval: 1000,
+    pageSize: 10,
     querySortType: "CREATETIME_DESC",
     autoActive: false,
     thresholds: [0, 0, 0, 0, 0, 0]
@@ -12,27 +12,36 @@
   var rareColors = ['#555', '#5cb85c', '#5bc0de', '#337ab7', '#f0ad4e', '#d9534f'];
   var rareNames = ['普通', '稀有', '卓越', '史诗', '神话', '传说'];
   var alarm;
-  
-  var getParam = function() {
-    return {
-      "pageNo": 1,
-      "pageSize": option.pageSize,
-      "querySortType": option.querySortType,
-      "petIds": [],
-      "requestId": new Date().getTime(),
-      "appId": 1
-    };
-  };
 
   function doQuery() {
     if(!option.enable) return;
-    $.ajax({
-      url: "https://pet-chain.baidu.com/data/market/queryPetsOnSale",
-      type: "POST",
-      contentType: 'application/json',
-      dataType: "json",
-      data: JSON.stringify(getParam()),
-      success: doQueryCallback
+
+    var settings = {
+      "url": "https://pet-chain.baidu.com/data/market/queryPetsOnSale",
+      "method": "POST",
+      "headers": {
+        "accept": "application/json",
+        "content-type": "application/json",
+        "cache-control": "no-cache"
+      },
+      "crossDomain": true,
+      "processData": false,
+      "data": JSON.stringify({
+        pageNo: 1,
+        pageSize: option.pageSize,
+        querySortType: option.querySortType,
+        filterCondition: JSON.stringify({
+          // "1": "3",
+          "6": "1"
+        }),
+        petIds: [],
+        appId: 1,
+        requestId: new Date().getTime()
+      })
+    }
+    
+    $.ajax(settings).done(function (response) {
+      doQueryCallback(response);
     });
   }
 
